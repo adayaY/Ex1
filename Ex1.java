@@ -34,7 +34,7 @@ public class Ex1 {
 //The function checks if the string  contains only digits (by using the regular expression [0-9]+).
 //If so, the function converts the string to an int by Integer.parseInt(num)
 
-        if (num.matches("[0-9]+")) { //
+        if (num.matches("[0-9]+")) {
             ans = Integer.parseInt(num);
             return ans;
         }
@@ -42,8 +42,8 @@ public class Ex1 {
         String num1 = num.substring(0, num.length() - 2);//A command that inserts the string minus 2 last members
 
 
-        base = valuebase(num);
-        ans = (Integer.parseInt(num1, base));// פקודה שמחשבת מספר בססיס מסוייםif ()
+        base = valuebase(num);//Checks what the base value is
+        ans = (Integer.parseInt(num1, base));// A command that calculates a number in a certain base
 
         return ans;
 
@@ -61,49 +61,40 @@ public class Ex1 {
 
 
         boolean ans = true;
-        if(a.equals(" ")){
+        if(a.contains(" ")){// Check if the string contains a space
             return false;}
 
-        if (a == null) // סקירה ובדירה שהמרחוזת לא שווה לNULL
+        if (a == null) //Checking if the string =null
             ans = false;
         else {
-            String n = a.split("b")[0];
+            String n = a.split("b")[0];// Splitting the string in order to test it
             if (n == "") return false;
             if (a == "")
                 ans = false;
 
             else {
-                 for (int i = 0; i < a.length()-1; i++) {
-                     char A =a.charAt(i);  // התו הנוכחי
-                     char B = a.charAt(i + 1); // התו הבא
 
-                     if (Character.isLetter(A) && Character.isLetter(B) && a.charAt(i + 1) == ' ') {
-                        return false;}
-                    if (Character.isLetter(A) && B == ' ' && !Character.isLetter(a.charAt(i + 2))) {
-                        return false;
-                    }
-                }
                 for (int i = 0; i < n.length(); i++) {
 
-                        if (!digits.contains(n.charAt(i) + "")) {// פונגציה הסורקת את תוי המחרוזרת ובודקת אם לא שווה לdigits
+                        if (!digits.contains(n.charAt(i) + "")) {// function that scans the string characters and checks if the string values are correct
                             return false;
                         }
 
                     }
 
-                    if (a.contains("b")) {
+                    if (a.contains("b")) {// Checking if we got a string with the letter "b"
                         for (int i = 0; i < a.length() - 2; i++) {
-                            if (a.charAt(i) >= a.charAt(a.length() - 1)) {
+                            if (a.charAt(i) >= a.charAt(a.length() - 1)) {//Checks that the string values are smaller than the base
                                 ans = false;
                             }
                         }
                     }
-                    if (a.charAt(a.length() - 1) == 'b') {
+                    if (a.charAt(a.length() - 1) == 'b') {//If the last character is "b" then return false
                         ans = false;
                     }
-                    if (!a.contains("b")) {//בדיקה אם זוהיא מחרוזת שלא מכילה את b
+                    if (!a.contains("b")) {//Test if this is a string that does not contain "b"
                         for (int i = 0; i < n.length(); i++) {
-                            if (!digits.substring(0, 10).contains(n.charAt(i) + "")) {//
+                            if (!digits.substring(0, 10).contains(n.charAt(i) + "")) {//Scan the characters of the (partial) string and check if the characters are correct
                                 return false;
                             }
                         }
@@ -123,17 +114,18 @@ public class Ex1 {
          * @param base the basis [2,16]
          * @return a String representing a number (in base) equals to num, or an empty String (in case of wrong input).
          */
-        public static String int2Number ( int num, int base){//פקודה שמקבלת מספר והיא תמיר אותו לבסיס נדרש
+        public static String int2Number ( int num, int base){//A command that accepts a number and converts it to a required base
             String ans = "";
-            if (num < 0 || base < 2 || base > 16)// בדיקה שהבייס תקין
+            if (num < 0 || base < 2 || base > 16)// Check that the base is in order
                 return ans;
 
-            String a = Integer.toString(num, base).toUpperCase();// מקבלת מספר בבסיס 10 ובסיס שנמיר אליו והמרה לאותיות גדולות
-            ans = a + "b" + digits.charAt(base);//מקבל את הערך (אותיות) במיקום של הבסיס
+            String a = Integer.toString(num, base).toUpperCase();
+            //A command that accepts a number in base 10 and another base to convert and convert to uppercase letters
+            ans = a + "b" + digits.charAt(base);//Gets the value (letters) at the base position
 
             return ans;
 
-            //  להוסיף פןנגציה שמדפיסה תוצאה סופיתשל בסיס חד ספרתית
+
         }
 
 
@@ -147,27 +139,19 @@ public class Ex1 {
     public static boolean equals(String n1, String n2) {
         boolean ans = true;
         int N1=0,N2=0;
-        N1=number2Int(n1);
-        N2=number2Int(n2);
+        N1=number2Int(n1);//conversion to int
+        N2=number2Int(n2);//conversion to int
 
-        if (N1==N2) {//פןנגציה המוושה אם ל2 המחרוזותיש אותו ערך
+        if (N1==N2) {//A function that stops if the 2 strings have the same value
             return ans;
-        } else return false; // 5bA 101b2
+        } else return false;
     }
 
-    /**
-     * This static function search for the array index with the largest number (in value).
-     * In case there are more than one maximum - returns the first index.
-     * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
-     *
-     * @param a arr array of numbers*
-     * @return the index in the array in with the largest number (in value).
-     */
-
+    /// Convert numbers to represent bases from 9-16
     public static int valuebase(String a) {
 
-        String[]arr=a.split("b");
-        char ch=arr[1].charAt(0);//  מכניסה לCH את הערך של הבסיס
+        String[]arr=a.split("b");//Splitting the string into an array of strings separated by "b"
+        char ch=arr[1].charAt(0);//  Enters CH the value of the base
         int base=0 ;
         if (ch == 'A') {
             base = 10;
@@ -192,24 +176,30 @@ public class Ex1 {
         if (ch == 'G') {
             base = 16;
         }
-      //  char c=base.charAt(0);
+
         if(base==0)
             base=Integer.parseInt(arr[1]);// במקרה והבסיס מספר ולא אות מחזיר אותו כINY
 
 
         return base;
     }
-
+    /**
+     * This static function search for the array index with the largest number (in value).
+     * In case there are more than one maximum - returns the first index.
+     * Note: you can assume that the array is not null and is not empty, yet it may contain null or none-valid numbers (with value -1).
+     * @param arr arr array of numbers*
+     * @return the index in the array in with the largest number (in value).
+     */
     public static int maxIndex(String[] arr) {
         int ans = 0;
         int maxValue=0;
-        for (int i = 0; i <3; i++) {
+        for (int i = 0; i <3; i++) {//Running the array and checking which index has the highest number
             if (number2Int(arr[i])>number2Int(arr[i+1])) {
                 maxValue = number2Int(arr[i]);
                 ans = i;
             }
         }
-        if(number2Int(arr[3])>number2Int(arr[2])){
+        if(number2Int(arr[3])>number2Int(arr[2])){// Checking the last member in the array
             maxValue = number2Int(arr[3]);
             ans=3;
         }
