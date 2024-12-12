@@ -178,7 +178,7 @@ public class Ex1 {
         }
 
         if(base==0)
-            base=Integer.parseInt(arr[1]);// במקרה והבסיס מספר ולא אות מחזיר אותו כINY
+            base=Integer.parseInt(arr[1]);//In case the base is a number and not a letter, returns it as int
 
 
         return base;
